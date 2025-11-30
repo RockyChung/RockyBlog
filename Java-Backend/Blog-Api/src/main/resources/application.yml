@@ -1,0 +1,23 @@
+spring:
+  application:
+    name:  Blog-Api
+  datasource:
+    # 這裡填入 Neon 給你的 JDBC url
+    # 格式通常是: jdbc:postgresql://ep-xxxx.aws.neon.tech:5432/neondb?sslmode=require
+    url: jdbc:postgresql://ep-cold-breeze-a16jmu1p-pooler.ap-southeast-1.aws.neon.tech:5432/BlogApiDB?sslmode=require
+    username: neondb_owner
+    password: npg_QXgfHmO7na2K
+    driver-class-name: org.postgresql.Driver
+
+# 讓 MyBatis-Plus 知道這是 PostgreSQL (通常它會自動識別，但指定比較保險)
+mybatis-plus:
+  configuration:
+    # 解決 Postgres 大小寫敏感問題較寬鬆的設定
+    map-underscore-to-camel-case: true
+
+    # 在這裡新增 JWT 設定
+    rocky:
+      jwt:
+        secret: f4e2e52071b251019799b6600440ad80 # 密鑰，隨便寫一串亂碼
+        expire: 604800 # 過期時間 (秒)，這裡設為 7 天
+        header: Authorization # 前端傳過來時 Header 的名稱
